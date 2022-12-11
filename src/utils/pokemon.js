@@ -1,3 +1,4 @@
+// 1ページ20匹分のポケモンの大まかな情報をとってくる
 export const getAllPokemon = (url) => {
   return new Promise((resolve, reject) => {
     fetch(url)
@@ -6,6 +7,7 @@ export const getAllPokemon = (url) => {
   });
 };
 
+// 一匹のポケモンの詳細な情報をとってくる
 export const getPokemon = (url) => {
   return new Promise((resolve, reject) => {
     fetch(url)
