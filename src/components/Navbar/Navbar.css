@@ -1,5 +1,5 @@
 nav {
-  background-color: rgb(21, 91, 145);
+  background-color: var(--main-color);
   color: white;
   height: 65px;
   font-weight: 600;
