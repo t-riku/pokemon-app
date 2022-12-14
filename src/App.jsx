@@ -36,11 +36,13 @@ function App() {
 
   // 各ポケモンの詳細なデータを取得するための関数を定義
   const loadPokemon = async (data) => {
+    // _pokemonDataにはURLが入っている
     let _pokemonData = await Promise.all(
       data.map((pokemon) => {
         // console.log(pokemon)で一匹ごとの名前とさらに詳細なURLがとってこれる
         // console.log(pokemon);
 
+        // pokemon.jsで定義したgetPokemonで詳細なurlをとってきて変数に定義
         let pokemonRecord = getPokemon(pokemon.url);
 
         // console.log(pokemon.url);
