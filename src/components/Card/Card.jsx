@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./Card.css";
 import Modal from "react-modal";
+import { getPokemon } from "../../utils/pokemon.js";
 
 // アプリのルートを識別するクエリセレクタを指定する。
 Modal.setAppElement("#root");
 
 // 親コンポーネントのpokemonをpropsとして受け取る
 const Card = ({ pokemon }) => {
+  // console.log(pokemon);
+  // let pokemonSpecies = getPokemon(pokemon.species.url);
+  // console.log(pokemonSpecies);
   // モーダルの表示状態と切り替える為にState(props)を準備
   // false = 非表示、数値 = 表示しているModalの番目とする
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -15,6 +19,9 @@ const Card = ({ pokemon }) => {
   //どのモーダルを表示するのか操作するために関数を準備
   const openModal = () => {
     setIsOpen(true);
+  };
+  const afterOpenModal = () => {
+    // モーダルが開いた後の処理
   };
   // shouldCloseOnEscやshouldCloseOnOverlayCliceを使う場合に設定が必要
   // モーダルを非表示の状態にするため、falseを指定する
@@ -138,6 +145,8 @@ const Card = ({ pokemon }) => {
         contentLabel="modal"
         // isOpenがtrueならモダールが起動する
         isOpen={modalIsOpen}
+        // モーダルが開いた後の処理を定義
+        onAfterOpen={afterOpenModal}
         // モーダルを閉じる処理を定義
         onRequestClose={() => closeModal()}
         // スタイリングを定義
@@ -182,7 +191,6 @@ const Card = ({ pokemon }) => {
                   </p>
                 </div>
                 <div className="cardData">
-                  {/* <p className="title">特性：{pokemon.abilities[0].ability.name}</p> */}
                   <div className="title">
                     特性：
                     {/* 特性は複数ある可能性があるためmap関数で全部とってくる */}
@@ -202,32 +210,6 @@ const Card = ({ pokemon }) => {
                 <div className="cardStats">
                   {/* 種族値は複数あるためmap関数で全部とってくる */}
                   {pokemon.stats.map((stat) => {
-                    // console.log(stat);
-                    // console.log(stat.base_stat);
-                    // const arrStat = () =>
-                    //   setStats((prev) => {
-                    //     return [...prev, stat.base_stat];
-                    //   });
-                    // arrStat;
-                    // setStats((prev) => {
-                    //   return [...prev, stat.base_stat];
-                    // });
-                    // console.log(stats);
-                    // const totalStat = () => setStat(stats + stat.base_stat);
-                    // var arr = new Array();
-                    // arr.push(stat.base_stat);
-                    // console.log(arr);
-                    // setArray(arr);
-                    // const totalArray = [...arr, array];
-                    // console.log(totalArray);
-
-                    // setArray = array.concat(arr);
-                    // console.log(setArray);
-                    // const totalStat = stats.reduce(
-                    //   (sum, stat) => sum + stat.length,
-                    //   0
-                    // );
-                    // console.log(totalStat);
                     return (
                       <div key={stat.stat.name} className="stats">
                         <span className="stat">{stat.stat.name} :</span>
@@ -237,6 +219,10 @@ const Card = ({ pokemon }) => {
                       </div>
                     );
                   })}
+                  totalStat :
+                  {pokemon.stats
+                    .map((stat) => stat.base_stat)
+                    .reduce((base_stat, acc) => base_stat + acc)}
                 </div>
               </div>
             </div>
