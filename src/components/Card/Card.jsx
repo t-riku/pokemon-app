@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Card.css";
 import Modal from "react-modal";
-import { getPokemon } from "../../utils/pokemon.js";
+// import { getPokemon } from "../../utils/pokemon.js";
 
 // アプリのルートを識別するクエリセレクタを指定する。
 Modal.setAppElement("#root");
@@ -19,9 +19,6 @@ const Card = ({ pokemon }) => {
   //どのモーダルを表示するのか操作するために関数を準備
   const openModal = () => {
     setIsOpen(true);
-  };
-  const afterOpenModal = () => {
-    // モーダルが開いた後の処理
   };
   // shouldCloseOnEscやshouldCloseOnOverlayCliceを使う場合に設定が必要
   // モーダルを非表示の状態にするため、falseを指定する
@@ -125,7 +122,7 @@ const Card = ({ pokemon }) => {
 
   return (
     <div
-      onClick={() => openModal()}
+      onClick={openModal}
       className="card"
       style={{ backgroundColor: color }}
     >
@@ -145,10 +142,8 @@ const Card = ({ pokemon }) => {
         contentLabel="modal"
         // isOpenがtrueならモダールが起動する
         isOpen={modalIsOpen}
-        // モーダルが開いた後の処理を定義
-        onAfterOpen={afterOpenModal}
         // モーダルを閉じる処理を定義
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         // スタイリングを定義
         shouldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
@@ -229,7 +224,7 @@ const Card = ({ pokemon }) => {
           </div>
 
           <button
-            onClick={() => closeModal()}
+            onClick={closeModal}
             className="modal__btn__close__bottom"
             type="button"
           >
@@ -237,7 +232,7 @@ const Card = ({ pokemon }) => {
           </button>
 
           <button
-            onClick={() => closeModal()}
+            onClick={closeModal}
             className="modal__btn__close"
             type="button"
           ></button>
